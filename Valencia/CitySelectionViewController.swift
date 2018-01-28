@@ -7,7 +7,7 @@ protocol CitySelectionProtocol {
 class CitySelectionViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
 
   var delegate: CitySelectionProtocol?
-  var sectionTitles = ["A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z"]
+  let sectionTitles = ["A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z"]
   var sectionValues: [[String]] = []
 
   override func viewDidLoad() {
