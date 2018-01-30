@@ -40,9 +40,8 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="AYQ-ao-PDc">
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="AYQ-ao-PDc">
                                 <rect key="frame" x="0.0" y="120" width="375" height="547"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="TimeZoneCell" textLabel="x4h-Kd-iKM" style="IBUITableViewCellStyleDefault" id="m0F-iX-Rjn">
@@ -69,14 +68,15 @@
                                     <outlet property="delegate" destination="tQb-1d-Nxd" id="fm5-nc-BW7"/>
                                 </connections>
                             </tableView>
-                            <searchBar contentMode="redraw" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="la7-dO-Edy">
+                            <searchBar contentMode="redraw" translatesAutoresizingMaskIntoConstraints="NO" id="la7-dO-Edy">
                                 <rect key="frame" x="0.0" y="64" width="306" height="56"/>
-                                <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
                                 <textInputTraits key="textInputTraits"/>
+                                <connections>
+                                    <outlet property="delegate" destination="tQb-1d-Nxd" id="Il4-Tg-1sQ"/>
+                                </connections>
                             </searchBar>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Zve-8H-IaN">
-                                <rect key="frame" x="306" y="64" width="69" height="56"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Zve-8H-IaN">
+                                <rect key="frame" x="327" y="64" width="48" height="56"/>
                                 <state key="normal" title="Cancel"/>
                                 <connections>
                                     <action selector="cancelTapped:" destination="tQb-1d-Nxd" eventType="touchUpInside" id="QE8-H8-rhH"/>
@@ -84,9 +84,26 @@
                             </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="la7-dO-Edy" firstAttribute="leading" secondItem="iey-e9-Tgf" secondAttribute="leading" id="AQC-V8-gX4"/>
+                            <constraint firstItem="Zve-8H-IaN" firstAttribute="leading" secondItem="la7-dO-Edy" secondAttribute="trailing" constant="21" id="Gc5-Fm-kVe"/>
+                            <constraint firstItem="AYQ-ao-PDc" firstAttribute="leading" secondItem="iey-e9-Tgf" secondAttribute="leading" id="NOh-au-D4M"/>
+                            <constraint firstItem="AYQ-ao-PDc" firstAttribute="trailing" secondItem="iey-e9-Tgf" secondAttribute="trailing" id="YFC-B4-oZH"/>
+                            <constraint firstItem="Zve-8H-IaN" firstAttribute="top" secondItem="iey-e9-Tgf" secondAttribute="top" id="YfH-x3-FL1"/>
+                            <constraint firstItem="la7-dO-Edy" firstAttribute="top" secondItem="iey-e9-Tgf" secondAttribute="top" id="Z0h-8d-rJC"/>
+                            <constraint firstItem="AYQ-ao-PDc" firstAttribute="top" secondItem="la7-dO-Edy" secondAttribute="bottom" id="by1-JD-gHB"/>
+                            <constraint firstItem="Zve-8H-IaN" firstAttribute="trailing" secondItem="iey-e9-Tgf" secondAttribute="trailing" id="fIo-mL-kUq"/>
+                            <constraint firstItem="AYQ-ao-PDc" firstAttribute="bottom" secondItem="iey-e9-Tgf" secondAttribute="bottom" id="hPQ-LY-wdS"/>
+                            <constraint firstItem="AYQ-ao-PDc" firstAttribute="top" secondItem="la7-dO-Edy" secondAttribute="bottom" id="obS-ZB-1Oc"/>
+                            <constraint firstItem="AYQ-ao-PDc" firstAttribute="top" secondItem="Zve-8H-IaN" secondAttribute="bottom" id="vMx-lo-Wre"/>
+                        </constraints>
                         <viewLayoutGuide key="safeArea" id="iey-e9-Tgf"/>
                     </view>
                     <navigationItem key="navigationItem" title="Choose a City." id="K2g-nS-C74"/>
+                    <connections>
+                        <outlet property="cityListSearchBar" destination="la7-dO-Edy" id="DtB-U1-9Th"/>
+                        <outlet property="cityListTableView" destination="AYQ-ao-PDc" id="f5L-1D-oIm"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="eT2-La-HkH" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -114,6 +131,7 @@
                 <tabBarController automaticallyAdjustsScrollViewInsets="NO" id="N9s-KK-xLb" sceneMemberID="viewController">
                     <toolbarItems/>
                     <tabBar key="tabBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" translucent="NO" id="YmB-PG-fav">
+                        <rect key="frame" x="0.0" y="0.0" width="1000" height="1000"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <color key="barTintColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
