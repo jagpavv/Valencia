@@ -6,6 +6,9 @@ protocol CitySelectionProtocol {
 
 class CitySelectionViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, UISearchBarDelegate {
 
+  @IBOutlet weak var cityListSearchBar: UISearchBar!
+  @IBOutlet weak var cityListTableView: UITableView!
+
   var delegate: CitySelectionProtocol?
   let sectionTitles = ["A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z"]
 
@@ -18,9 +21,6 @@ class CitySelectionViewController: UIViewController, UITableViewDelegate, UITabl
   var isSearching: Bool {
     return searchString.count > 0
   }
-
-  @IBOutlet weak var cityListSearchBar: UISearchBar!
-  @IBOutlet weak var cityListTableView: UITableView!
 
   override func viewDidLoad() {
     super.viewDidLoad()
@@ -49,7 +49,6 @@ class CitySelectionViewController: UIViewController, UITableViewDelegate, UITabl
   @IBAction func cancelTapped(_ sender: UIButton) {
     dismiss(animated: true, completion: nil)
   }
-
 
   func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
     return isSearching ? nil : sectionTitles[section]
