@@ -1,11 +1,8 @@
 import UIKit
 
-let kSavedCities = "SavedCities"
+class SelectedCityViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, CitySelectionProtocol {
 
-class WorldClockViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, CitySelectionProtocol {
-
-  @IBOutlet weak var worldClockTableView: UITableView!
-
+  @IBOutlet weak var selectedCityTableView: UITableView!
   var selectedCityInWorldClock: [String] = []
 
   override func viewDidLoad() {
@@ -15,23 +12,22 @@ class WorldClockViewController: UIViewController, UITableViewDelegate, UITableVi
   override func viewWillAppear(_ animated: Bool) {
     super.viewWillAppear(animated)
     loadCities()
-    worldClockTableView.reloadData()
+    selectedCityTableView.reloadData()
   }
 
   override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-    if segue.identifier == "CitySelectionSegue" {
+    if segue.identifier == "CityAddSegue" {
       let navi = segue.destination as! UINavigationController
       let dest = navi.viewControllers.first as! CitySelectionViewController
       dest.delegate = self
     }
   }
 
-  // conform Protocol
   func citySelected(city: String) {
     if !selectedCityInWorldClock.contains(city) {
       selectedCityInWorldClock.append(city)
       saveCities()
-      worldClockTableView.reloadData()
+      selectedCityTableView.reloadData()
     }
   }
 
@@ -52,7 +48,7 @@ class WorldClockViewController: UIViewController, UITableViewDelegate, UITableVi
   }
 
   func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-    let cell = tableView.dequeueReusableCell(withIdentifier: "WorldClockCell")
+    let cell = tableView.dequeueReusableCell(withIdentifier: "SelectedCityCell")
     cell?.textLabel?.text = selectedCityInWorldClock[indexPath.row]
     return cell!
   }
