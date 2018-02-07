@@ -13,6 +13,8 @@ class CitySelectionViewController: UIViewController, UITableViewDelegate, UITabl
   let sectionTitles = ["A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z"]
 
   var timeZoneCity: [String] = []
+
+  // result of searchBar searching
   var timeZoneCityFiltered: [String] = []
 
   var sectionValues: [[String]] = []
