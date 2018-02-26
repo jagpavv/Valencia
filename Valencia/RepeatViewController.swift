@@ -66,7 +66,7 @@ extension RepeatViewController {
     for day in weekdaysSorted {
       switch day {
       case 1:
-        weekdayString += "sun "
+        weekdayString += "Sun "
       case 2:
         weekdayString += "Mon "
       case 3:
