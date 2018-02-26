@@ -1,9 +1,14 @@
 import UIKit
 
-class SelectedCityViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, CitySelectionProtocol {
+protocol SelectedCityProtocol {
+  func tappedCity(city: String)
+}
 
+class SelectedCityViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, CitySelectionProtocol {
+  
   @IBOutlet weak var selectedCityTableView: UITableView!
   var selectedCityInWorldClock: [String] = []
+  var delegate: SelectedCityProtocol?
 
   override func viewDidLoad() {
     super.viewDidLoad()
@@ -53,4 +58,9 @@ class SelectedCityViewController: UIViewController, UITableViewDataSource, UITab
     return cell!
   }
 
+  func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+    let selectedCity = selectedCityInWorldClock[indexPath.row]
+    delegate?.tappedCity(city: selectedCity)
+    navigationController?.popViewController(animated: true)
+  }
 }

@@ -13,12 +13,14 @@
 		8BE9DF1C201A8DE7005FCE6F /* TODO in Resources */ = {isa = PBXBuildFile; fileRef = 8BE9DF1B201A8DE7005FCE6F /* TODO */; };
 		AC05FB2620277D1D00FB654B /* AddAlarmViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC05FB2520277D1D00FB654B /* AddAlarmViewController.swift */; };
 		AC05FB2C2028EF6200FB654B /* SelectedCityViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC05FB2B2028EF6200FB654B /* SelectedCityViewController.swift */; };
+		AC40F6F52041F18300E17DA7 /* SegueInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC40F6F42041F18300E17DA7 /* SegueInfo.swift */; };
 		AC70B0F3201A7A3600712DF9 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC70B0F2201A7A3600712DF9 /* AppDelegate.swift */; };
 		AC70B0F5201A7A3600712DF9 /* WorldClockViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC70B0F4201A7A3600712DF9 /* WorldClockViewController.swift */; };
 		AC70B0F8201A7A3600712DF9 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = AC70B0F6201A7A3600712DF9 /* Main.storyboard */; };
 		AC70B0FA201A7A3600712DF9 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = AC70B0F9201A7A3600712DF9 /* Assets.xcassets */; };
 		AC70B0FD201A7A3600712DF9 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = AC70B0FB201A7A3600712DF9 /* LaunchScreen.storyboard */; };
 		AC70B108201A7A3600712DF9 /* ValenciaTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC70B107201A7A3600712DF9 /* ValenciaTests.swift */; };
+		AC8BBE8E203F2F51000365D2 /* RepeatViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC8BBE8D203F2F51000365D2 /* RepeatViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -38,6 +40,7 @@
 		8BE9DF1B201A8DE7005FCE6F /* TODO */ = {isa = PBXFileReference; lastKnownFileType = text; path = TODO; sourceTree = "<group>"; };
 		AC05FB2520277D1D00FB654B /* AddAlarmViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddAlarmViewController.swift; sourceTree = "<group>"; };
 		AC05FB2B2028EF6200FB654B /* SelectedCityViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectedCityViewController.swift; sourceTree = "<group>"; };
+		AC40F6F42041F18300E17DA7 /* SegueInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SegueInfo.swift; sourceTree = "<group>"; };
 		AC70B0EF201A7A3600712DF9 /* Valencia.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Valencia.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		AC70B0F2201A7A3600712DF9 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		AC70B0F4201A7A3600712DF9 /* WorldClockViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorldClockViewController.swift; sourceTree = "<group>"; };
@@ -48,6 +51,7 @@
 		AC70B103201A7A3600712DF9 /* ValenciaTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ValenciaTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		AC70B107201A7A3600712DF9 /* ValenciaTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ValenciaTests.swift; sourceTree = "<group>"; };
 		AC70B109201A7A3600712DF9 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		AC8BBE8D203F2F51000365D2 /* RepeatViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RepeatViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -97,6 +101,8 @@
 				AC70B0F6201A7A3600712DF9 /* Main.storyboard */,
 				AC05FB2520277D1D00FB654B /* AddAlarmViewController.swift */,
 				AC05FB2B2028EF6200FB654B /* SelectedCityViewController.swift */,
+				AC8BBE8D203F2F51000365D2 /* RepeatViewController.swift */,
+				AC40F6F42041F18300E17DA7 /* SegueInfo.swift */,
 				AC70B0F9201A7A3600712DF9 /* Assets.xcassets */,
 				AC70B0FB201A7A3600712DF9 /* LaunchScreen.storyboard */,
 				AC70B0FE201A7A3600712DF9 /* Info.plist */,
@@ -223,6 +229,8 @@
 				8BE9DF16201A81F8005FCE6F /* AlarmListViewController.swift in Sources */,
 				AC05FB2C2028EF6200FB654B /* SelectedCityViewController.swift in Sources */,
 				8BE9DF18201A84C9005FCE6F /* CitySelectionViewController.swift in Sources */,
+				AC40F6F52041F18300E17DA7 /* SegueInfo.swift in Sources */,
+				AC8BBE8E203F2F51000365D2 /* RepeatViewController.swift in Sources */,
 				8BE9DF1A201A8936005FCE6F /* WorldClock.swift in Sources */,
 				AC70B0F3201A7A3600712DF9 /* AppDelegate.swift in Sources */,
 			);

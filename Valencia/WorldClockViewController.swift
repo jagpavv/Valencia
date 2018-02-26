@@ -6,6 +6,17 @@ class WorldClockViewController: UIViewController, UITableViewDelegate, UITableVi
 
   @IBOutlet weak var worldClockTableView: UITableView!
 
+  // edit delete
+  @IBAction func EditButton(_ sender: UIBarButtonItem) {
+    if worldClockTableView.isEditing {
+      sender.title = "Edit"
+      worldClockTableView.setEditing(false, animated: true)
+    } else {
+      sender.title = "Done"
+      worldClockTableView.setEditing(true, animated: true)
+    }
+  }
+
   var selectedCityInWorldClock: [String] = []
 
   override func viewDidLoad() {
@@ -57,4 +68,12 @@ class WorldClockViewController: UIViewController, UITableViewDelegate, UITableVi
     return cell!
   }
 
+  // swipe delete
+  func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
+    if editingStyle == UITableViewCellEditingStyle.delete {
+      selectedCityInWorldClock.remove(at: indexPath.row)
+      tableView.deleteRows(at: [indexPath], with: UITableViewRowAnimation.automatic)
+      saveCities()
+    }
+  }
 }
