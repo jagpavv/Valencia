@@ -64,8 +64,24 @@ class WorldClockViewController: UIViewController, UITableViewDelegate, UITableVi
 
   func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
     let cell = tableView.dequeueReusableCell(withIdentifier: "WorldClockCell")
-    cell?.textLabel?.text = selectedCityInWorldClock[indexPath.row]
+    let city = selectedCityInWorldClock[indexPath.row]
+    let timeZone = TimeZone.knownTimeZoneIdentifiers.filter { $0.contains(city) }
+    let timeZoneString = timeZone[0]
+    let tempResult = timeWithTimeZone(date: Date(), timezone: TimeZone(identifier: timeZoneString)!)
+
+    cell?.textLabel?.text = city
+    cell?.detailTextLabel?.text = tempResult
+    print(timeZone)
+    print(timeZoneString)
     return cell!
+  }
+
+  // get date from TimeZone
+  func timeWithTimeZone(date: Date, timezone: TimeZone) -> String {
+    let formatter = DateFormatter()
+    formatter.dateFormat = "yyyy-MM-dd HH:mm"
+    formatter.timeZone = timezone
+    return formatter.string(from: date)
   }
 
   // swipe delete
