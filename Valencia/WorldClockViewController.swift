@@ -18,7 +18,6 @@ class WorldClockViewController: UIViewController, UITableViewDelegate, UITableVi
   }
 
   var selectedCityInWorldClock: [String] = []
-  var date = Date()
 
   override func viewDidLoad() {
     super.viewDidLoad()
@@ -68,7 +67,7 @@ class WorldClockViewController: UIViewController, UITableViewDelegate, UITableVi
     let city = selectedCityInWorldClock[indexPath.row]
     let timeZone = TimeZone.knownTimeZoneIdentifiers.filter { $0.contains(city) }
     let timeZoneString = timeZone[0]
-    let tempResult = timeWithTimeZone(date: date, timezone: TimeZone(identifier: timeZoneString)!)
+    let tempResult = timeWithTimeZone(date: Date(), timezone: TimeZone(identifier: timeZoneString)!)
 
     cell?.textLabel?.text = city
     cell?.detailTextLabel?.text = tempResult
