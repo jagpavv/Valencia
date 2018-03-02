@@ -4,6 +4,9 @@ let kSavedCities = "SavedCities"
 
 class WorldClockViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, CitySelectionProtocol {
 
+  var selectedCityInWorldClock: [String] = []
+  var timer: Timer? = nil
+
   @IBOutlet weak var worldClockTableView: UITableView!
 
   // edit delete
@@ -17,8 +20,6 @@ class WorldClockViewController: UIViewController, UITableViewDelegate, UITableVi
     }
   }
 
-  var selectedCityInWorldClock: [String] = []
-
   override func viewDidLoad() {
     super.viewDidLoad()
   }
@@ -26,7 +27,16 @@ class WorldClockViewController: UIViewController, UITableViewDelegate, UITableVi
   override func viewWillAppear(_ animated: Bool) {
     super.viewWillAppear(animated)
     loadCities()
+    timer = Timer.scheduledTimer(withTimeInterval: 1.0, repeats: true, block: { _ in self.worldClockTableView.reloadData() })
     worldClockTableView.reloadData()
+  }
+
+  override func viewWillDisappear(_ animated: Bool) {
+    super.viewWillDisappear(animated)
+    if timer != nil {
+      timer?.invalidate()
+      timer = nil
+    }
   }
 
   override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
