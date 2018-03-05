@@ -27,7 +27,15 @@ class WorldClockViewController: UIViewController, UITableViewDelegate, UITableVi
   override func viewWillAppear(_ animated: Bool) {
     super.viewWillAppear(animated)
     loadCities()
-    timer = Timer.scheduledTimer(withTimeInterval: 1.0, repeats: true, block: { _ in self.worldClockTableView.reloadData() })
+    timer = Timer.scheduledTimer(withTimeInterval: 1.0, repeats: true, block: { [weak self] _ in
+      guard let indexPaths = self?.worldClockTableView.indexPathsForVisibleRows else { return }
+      for indexPath in indexPaths {
+        let cell = self?.worldClockTableView.cellForRow(at: indexPath)
+        if let city = self?.selectedCityInWorldClock[indexPath.row] {
+          cell?.detailTextLabel?.text = self?.timeStringFrom(city)
+        }
+      }
+    })
     worldClockTableView.reloadData()
   }
 
@@ -75,15 +83,16 @@ class WorldClockViewController: UIViewController, UITableViewDelegate, UITableVi
   func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
     let cell = tableView.dequeueReusableCell(withIdentifier: "WorldClockCell")
     let city = selectedCityInWorldClock[indexPath.row]
-    let timeZone = TimeZone.knownTimeZoneIdentifiers.filter { $0.contains(city) }
-    let timeZoneString = timeZone[0]
-    let tempResult = timeWithTimeZone(date: Date(), timezone: TimeZone(identifier: timeZoneString)!)
 
     cell?.textLabel?.text = city
-    cell?.detailTextLabel?.text = tempResult
-    print(timeZone)
-    print(timeZoneString)
+    cell?.detailTextLabel?.text = timeStringFrom(city)
+
     return cell!
+  }
+
+  func timeStringFrom(_ city: String) -> String {
+    let timeZone = TimeZone.knownTimeZoneIdentifiers.filter { $0.contains(city) }
+    return timeWithTimeZone(date: Date(), timezone: TimeZone(identifier: timeZone[0])!)
   }
 
   // get date from TimeZone
