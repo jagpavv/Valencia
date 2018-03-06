@@ -111,4 +111,11 @@ class WorldClockViewController: UIViewController, UITableViewDelegate, UITableVi
       saveCities()
     }
   }
+
+  // move row
+  func tableView(_ tableView: UITableView, moveRowAt sourceIndexPath: IndexPath, to destinationIndexPath: IndexPath) {
+    selectedCityInWorldClock.swapAt(sourceIndexPath.row, destinationIndexPath.row)
+    saveCities()
+    worldClockTableView.reloadData()
+  }
 }
