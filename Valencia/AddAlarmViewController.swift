@@ -1,25 +1,19 @@
 import UIKit
 import Foundation
 
-class AddAlarmViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, SelectedCityProtocol {
+class AddAlarmViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, SelectedCityProtocol, RepeatSelectionProtocol {
 
   @IBOutlet weak var datePicker: UIDatePicker!
   @IBOutlet weak var alarmOptionTableView: UITableView!
-  @IBAction func cancelTapped(_ sender: Any) {
-    dismiss(animated: true, completion: nil)
-  }
 
   var snoozeSwitch: UISwitch?
   var selectedCityInWorldClock: [String] = []
   var cityNameFor0Cell: String = ""
+  var weekdays: [Bool] = [false, false, false, false, false, false, false]
 
   override func viewDidLoad() {
     super.viewDidLoad()
     loadCities()
-  }
-
-  override func didReceiveMemoryWarning() {
-    super.didReceiveMemoryWarning()
   }
 
   func loadCities() {
@@ -32,12 +26,21 @@ class AddAlarmViewController: UIViewController, UITableViewDataSource, UITableVi
     if segue.identifier == "SelectedCityListSegue" {
       let destination = segue.destination as! SelectedCityViewController
       destination.delegate = self
+    } else if segue.identifier == "RepeatSegue" {
+      let destination = segue.destination as! RepeatViewController
+      destination.weekdays = weekdays
+      destination.delegate = self
     }
   }
 
   // conform Protocol
   func tappedCity(city: String) {
     cityNameFor0Cell = city
+    alarmOptionTableView.reloadData()
+  }
+
+  func selectedRepeat(weekdays: [Bool]) {
+    self.weekdays = weekdays
     alarmOptionTableView.reloadData()
   }
 
@@ -50,9 +53,9 @@ class AddAlarmViewController: UIViewController, UITableViewDataSource, UITableVi
     cell?.textLabel?.text = ["City", "Repeat", "Label", "Sound", "Snooze"][indexPath.row]
     switch indexPath.row {
     case 0:
-      cell?.detailTextLabel?.text = cell0City()
+      cell?.detailTextLabel?.text = cityCellText()
     case 1:
-      cell?.detailTextLabel?.text = "cell01"
+      cell?.detailTextLabel?.text = repeatCellText()
     case 2:
       cell?.detailTextLabel?.text = "cell02"
     case 3:
@@ -71,12 +74,8 @@ class AddAlarmViewController: UIViewController, UITableViewDataSource, UITableVi
   func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
     guard indexPath.row < 4 else { return }
 
-    print("selected: " + String(indexPath.row))
-
-    //    switch indexPath.row {
-    //    case 0: performSegue(withIdentifier: "SelectedCityListSegue", sender: self)
-    //    case 1: PerformSegue(withIdentifier: "RepeatSegue", sender: self)
-    //    }
+    let cell = tableView.cellForRow(at: indexPath)!
+    cell.setSelected(false, animated: true)
 
     if indexPath.row == 0 {
       performSegue(withIdentifier: "SelectedCityListSegue", sender: self)
@@ -85,8 +84,12 @@ class AddAlarmViewController: UIViewController, UITableViewDataSource, UITableVi
     }
   }
 
+  @IBAction func cancelTapped(_ sender: Any) {
+    dismiss(animated: true, completion: nil)
+  }
+
   //cell 0
-  func cell0City() -> String {
+  func cityCellText() -> String {
     if selectedCityInWorldClock.isEmpty {
       return "Please chose city"
     } else {
@@ -95,7 +98,9 @@ class AddAlarmViewController: UIViewController, UITableViewDataSource, UITableVi
   }
 
   //cell 1
-
+  func repeatCellText() -> String {
+    return RepeatViewController.reapeatText(weekdays: weekdays)
+  }
 
   @objc func snoozeValueChanged(_ sender: Any) {
     print("switch")
