@@ -392,12 +392,8 @@
                             <outlet property="delegate" destination="Lau-QM-8qF" id="BRp-dh-Xva"/>
                         </connections>
                     </tableView>
-                    <connections>
-                        <segue destination="YVo-KF-AXI" kind="unwind" identifier="unwindRepeatSegue" unwindAction="unwindRepeatSegue:" id="H0m-tw-xbk"/>
-                    </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="nka-Wz-1ou" userLabel="First Responder" sceneMemberID="firstResponder"/>
-                <exit id="YVo-KF-AXI" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
             <point key="canvasLocation" x="3177" y="2230"/>
         </scene>
@@ -547,6 +543,6 @@
         <image name="ic_language_white_36pt" width="36" height="36"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="3t4-ay-2qL"/>
+        <segue reference="Esz-vp-nLV"/>
     </inferredMetricsTieBreakers>
 </document>

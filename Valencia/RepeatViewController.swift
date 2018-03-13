@@ -1,88 +1,55 @@
 import UIKit
 
+protocol RepeatSelectionProtocol {
+  func selectedRepeat(weekdays: [Bool])
+}
+
 class RepeatViewController: UITableViewController {
 
-  @IBAction func unwindRepeatSegue(_ sender: UIStoryboardSegue) {
-  }
-
-  var weekdays: [Int] = []
-  
-  override func viewDidLoad() {
-    super.viewDidLoad()
-  }
+  var delegate: RepeatSelectionProtocol?
+  var weekdays: [Bool] = [false, false, false, false, false, false, false]
 
   override func viewWillDisappear(_ animated: Bool) {
-    performSegue(withIdentifier: "unwindRepeatSegue", sender: self)
+    super.viewWillDisappear(animated)
+    if isMovingFromParentViewController {
+      delegate?.selectedRepeat(weekdays: weekdays)
+    }
   }
-  
-  override func didReceiveMemoryWarning() {
-    super.didReceiveMemoryWarning()
-  }
-  
+
   override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
     let cell = super.tableView(tableView, cellForRowAt: indexPath)
-    
-    for weekday in weekdays {
-      if weekday == (indexPath.row + 1) {
-        cell.accessoryType = UITableViewCellAccessoryType.checkmark
-      }
-    }
+    cell.accessoryType = weekdays[indexPath.row] ? .checkmark : .none
     return cell
   }
   
   override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
     let cell = tableView.cellForRow(at: indexPath)!
-    
-    if let index = weekdays.index(of: (indexPath.row + 1)) {
-      weekdays.remove(at: index)
-      cell.setSelected(true, animated: true)
-      cell.setSelected(false, animated: true)
-      cell.accessoryType = UITableViewCellAccessoryType.none
-    }
-    else {
-      weekdays.append(indexPath.row + 1)
-      cell.setSelected(true, animated: true)
-      cell.setSelected(false, animated: true)
-      cell.accessoryType = UITableViewCellAccessoryType.checkmark
-    }
+    cell.setSelected(false, animated: true)
+    weekdays[indexPath.row] = !weekdays[indexPath.row]
+    cell.accessoryType = weekdays[indexPath.row] ? .checkmark : .none
+
   }
 }
 
 extension RepeatViewController {
-  static func reapeatText(weekdays: [Int]) -> String {
-    if weekdays.count == 7 {
-      return "Every day"
-    }
+  static func reapeatText(weekdays: [Bool]) -> String {
 
-    if weekdays.isEmpty {
+    let all = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"]
+    let selected = all.enumerated().flatMap { weekdays[$0.offset] ? $0.element : nil }
+
+    if selected.isEmpty {
       return "Never"
-    }
-
-    var weekdayString = String()
-    var weekdaysSorted: [Int] = [Int]()
-
-    weekdaysSorted = weekdays.sorted(by: <)
-
-    for day in weekdaysSorted {
-      switch day {
-      case 1:
-        weekdayString += "Sun "
-      case 2:
-        weekdayString += "Mon "
-      case 3:
-        weekdayString += "Tue "
-      case 4:
-        weekdayString += "Wed "
-      case 5:
-        weekdayString += "Thu "
-      case 6:
-        weekdayString += "Fri "
-      case 7:
-        weekdayString += "Sat "
-      default:
-        break
+    } else if selected.count == 7 {
+      return "Every day"
+    } else {
+      let allWeekdays = Array(all[1...5])
+      let allWeekends = all.filter { !allWeekdays.contains($0) }
+      if selected == allWeekdays {
+        return "Weekdays"
+      } else if selected == allWeekends {
+        return "Weekends"
       }
+      return selected.joined(separator: " ")
     }
-    return weekdayString
   }
 }
