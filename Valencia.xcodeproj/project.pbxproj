@@ -14,6 +14,7 @@
 		AC05FB2620277D1D00FB654B /* AddAlarmViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC05FB2520277D1D00FB654B /* AddAlarmViewController.swift */; };
 		AC05FB2C2028EF6200FB654B /* SelectedCityViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC05FB2B2028EF6200FB654B /* SelectedCityViewController.swift */; };
 		AC40F6F52041F18300E17DA7 /* SegueInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC40F6F42041F18300E17DA7 /* SegueInfo.swift */; };
+		AC5973C0205986A500E12020 /* LabelEditViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC5973BF205986A500E12020 /* LabelEditViewController.swift */; };
 		AC70B0F3201A7A3600712DF9 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC70B0F2201A7A3600712DF9 /* AppDelegate.swift */; };
 		AC70B0F5201A7A3600712DF9 /* WorldClockViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC70B0F4201A7A3600712DF9 /* WorldClockViewController.swift */; };
 		AC70B0F8201A7A3600712DF9 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = AC70B0F6201A7A3600712DF9 /* Main.storyboard */; };
@@ -41,6 +42,7 @@
 		AC05FB2520277D1D00FB654B /* AddAlarmViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddAlarmViewController.swift; sourceTree = "<group>"; };
 		AC05FB2B2028EF6200FB654B /* SelectedCityViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectedCityViewController.swift; sourceTree = "<group>"; };
 		AC40F6F42041F18300E17DA7 /* SegueInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SegueInfo.swift; sourceTree = "<group>"; };
+		AC5973BF205986A500E12020 /* LabelEditViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LabelEditViewController.swift; sourceTree = "<group>"; };
 		AC70B0EF201A7A3600712DF9 /* Valencia.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Valencia.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		AC70B0F2201A7A3600712DF9 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		AC70B0F4201A7A3600712DF9 /* WorldClockViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorldClockViewController.swift; sourceTree = "<group>"; };
@@ -102,6 +104,7 @@
 				AC05FB2520277D1D00FB654B /* AddAlarmViewController.swift */,
 				AC05FB2B2028EF6200FB654B /* SelectedCityViewController.swift */,
 				AC8BBE8D203F2F51000365D2 /* RepeatViewController.swift */,
+				AC5973BF205986A500E12020 /* LabelEditViewController.swift */,
 				AC40F6F42041F18300E17DA7 /* SegueInfo.swift */,
 				AC70B0F9201A7A3600712DF9 /* Assets.xcassets */,
 				AC70B0FB201A7A3600712DF9 /* LaunchScreen.storyboard */,
@@ -225,6 +228,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				AC05FB2620277D1D00FB654B /* AddAlarmViewController.swift in Sources */,
+				AC5973C0205986A500E12020 /* LabelEditViewController.swift in Sources */,
 				AC70B0F5201A7A3600712DF9 /* WorldClockViewController.swift in Sources */,
 				8BE9DF16201A81F8005FCE6F /* AlarmListViewController.swift in Sources */,
 				AC05FB2C2028EF6200FB654B /* SelectedCityViewController.swift in Sources */,
