@@ -1,15 +1,16 @@
 import UIKit
 import Foundation
 
-class AddAlarmViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, SelectedCityProtocol, RepeatSelectionProtocol {
+class AddAlarmViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, SelectedCityProtocol, RepeatSelectionProtocol, LabelEditProtocol {
 
   @IBOutlet weak var datePicker: UIDatePicker!
   @IBOutlet weak var alarmOptionTableView: UITableView!
 
   var snoozeSwitch: UISwitch?
   var selectedCityInWorldClock: [String] = []
-  var cityNameFor0Cell: String = ""
+  var cityNameForCityCell: String = ""
   var weekdays: [Bool] = [false, false, false, false, false, false, false]
+  var labelText: String = "Alarm"
 
   override func viewDidLoad() {
     super.viewDidLoad()
@@ -30,17 +31,26 @@ class AddAlarmViewController: UIViewController, UITableViewDataSource, UITableVi
       let destination = segue.destination as! RepeatViewController
       destination.weekdays = weekdays
       destination.delegate = self
+    } else if segue.identifier == "LabelSegue" {
+      let destination = segue.destination as! LabelEditViewController
+      destination.text = labelText
+      destination.delegate = self
     }
   }
 
   // conform Protocol
   func tappedCity(city: String) {
-    cityNameFor0Cell = city
+    cityNameForCityCell = city
     alarmOptionTableView.reloadData()
   }
 
   func selectedRepeat(weekdays: [Bool]) {
     self.weekdays = weekdays
+    alarmOptionTableView.reloadData()
+  }
+
+  func editedLabel(text: String) {
+    labelText = text
     alarmOptionTableView.reloadData()
   }
 
@@ -57,7 +67,7 @@ class AddAlarmViewController: UIViewController, UITableViewDataSource, UITableVi
     case 1:
       cell?.detailTextLabel?.text = repeatCellText()
     case 2:
-      cell?.detailTextLabel?.text = "cell02"
+      cell?.detailTextLabel?.text = labelText
     case 3:
       cell?.detailTextLabel?.text = "cell03"
     default: // case 4:
@@ -81,6 +91,8 @@ class AddAlarmViewController: UIViewController, UITableViewDataSource, UITableVi
       performSegue(withIdentifier: "SelectedCityListSegue", sender: self)
     } else if indexPath.row == 1 {
       performSegue(withIdentifier: "RepeatSegue", sender: self)
+    } else if indexPath.row == 2 {
+      performSegue(withIdentifier: "LabelSegue", sender: self)
     }
   }
 
@@ -93,7 +105,7 @@ class AddAlarmViewController: UIViewController, UITableViewDataSource, UITableVi
     if selectedCityInWorldClock.isEmpty {
       return "Please chose city"
     } else {
-      return cityNameFor0Cell.isEmpty ? String(selectedCityInWorldClock[0]) : cityNameFor0Cell
+      return cityNameForCityCell.isEmpty ? String(selectedCityInWorldClock[0]) : cityNameForCityCell
     }
   }
 
