@@ -1,16 +1,17 @@
 import UIKit
 import Foundation
 
-class AddAlarmViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, SelectedCityProtocol, RepeatSelectionProtocol, LabelEditProtocol {
+class AddAlarmViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, SelectedCityProtocol, RepeatSelectionProtocol, LabelEditProtocol, SoundSelectedProtocol {
 
   @IBOutlet weak var datePicker: UIDatePicker!
   @IBOutlet weak var alarmOptionTableView: UITableView!
 
-  var snoozeSwitch: UISwitch?
   var selectedCityInWorldClock: [String] = []
-  var cityNameForCityCell: String = ""
-  var weekdays: [Bool] = [false, false, false, false, false, false, false]
-  var labelText: String = "Alarm"
+  var city: String = ""
+  var repeats: [Bool] = [false, false, false, false, false, false, false]
+  var label: String = "Alarm"
+  var sound: String = kAlarmSoundList[0]
+  var snooze: Bool = true
 
   override func viewDidLoad() {
     super.viewDidLoad()
@@ -29,28 +30,37 @@ class AddAlarmViewController: UIViewController, UITableViewDataSource, UITableVi
       destination.delegate = self
     } else if segue.identifier == "RepeatSegue" {
       let destination = segue.destination as! RepeatViewController
-      destination.weekdays = weekdays
+      destination.weekdays = repeats
       destination.delegate = self
     } else if segue.identifier == "LabelSegue" {
       let destination = segue.destination as! LabelEditViewController
-      destination.text = labelText
+      destination.text = label
+      destination.delegate = self
+    } else if segue.identifier == "SoundSegue" {
+      let destination = segue.destination as! SoundViewController
+      destination.selectedSoundName = sound
       destination.delegate = self
     }
   }
 
   // conform Protocol
   func tappedCity(city: String) {
-    cityNameForCityCell = city
+    self.city = city
     alarmOptionTableView.reloadData()
   }
 
   func selectedRepeat(weekdays: [Bool]) {
-    self.weekdays = weekdays
+    self.repeats = weekdays
     alarmOptionTableView.reloadData()
   }
 
   func editedLabel(text: String) {
-    labelText = text
+    label = text
+    alarmOptionTableView.reloadData()
+  }
+
+  func selectedSound(name: String) {
+    sound = name
     alarmOptionTableView.reloadData()
   }
 
@@ -67,15 +77,14 @@ class AddAlarmViewController: UIViewController, UITableViewDataSource, UITableVi
     case 1:
       cell?.detailTextLabel?.text = repeatCellText()
     case 2:
-      cell?.detailTextLabel?.text = labelText
+      cell?.detailTextLabel?.text = label
     case 3:
-      cell?.detailTextLabel?.text = "cell03"
+      cell?.detailTextLabel?.text = sound
     default: // case 4:
       let sw = UISwitch(frame: CGRect())
       sw.addTarget(self, action: #selector(snoozeValueChanged(_:)), for: .valueChanged)
-      sw.setOn(true, animated: false)
+      sw.setOn(snooze, animated: false)
       cell!.accessoryView = sw
-      snoozeSwitch = sw
     }
 
     return cell!
@@ -93,6 +102,8 @@ class AddAlarmViewController: UIViewController, UITableViewDataSource, UITableVi
       performSegue(withIdentifier: "RepeatSegue", sender: self)
     } else if indexPath.row == 2 {
       performSegue(withIdentifier: "LabelSegue", sender: self)
+    } else if indexPath.row == 3 {
+      performSegue(withIdentifier: "SoundSegue", sender: self)
     }
   }
 
@@ -105,16 +116,17 @@ class AddAlarmViewController: UIViewController, UITableViewDataSource, UITableVi
     if selectedCityInWorldClock.isEmpty {
       return "Please chose city"
     } else {
-      return cityNameForCityCell.isEmpty ? String(selectedCityInWorldClock[0]) : cityNameForCityCell
+      return city.isEmpty ? String(selectedCityInWorldClock[0]) : city
     }
   }
 
   //cell 1
   func repeatCellText() -> String {
-    return RepeatViewController.reapeatText(weekdays: weekdays)
+    return RepeatViewController.repeatText(weekdays: repeats)
   }
 
   @objc func snoozeValueChanged(_ sender: Any) {
-    print("switch")
+    guard let sw = sender as? UISwitch else { return }
+    snooze = sw.isOn
   }
 }

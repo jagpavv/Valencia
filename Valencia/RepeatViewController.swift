@@ -32,7 +32,7 @@ class RepeatViewController: UITableViewController {
 }
 
 extension RepeatViewController {
-  static func reapeatText(weekdays: [Bool]) -> String {
+  static func repeatText(weekdays: [Bool]) -> String {
 
     let all = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"]
     let selected = all.enumerated().flatMap { weekdays[$0.offset] ? $0.element : nil }
